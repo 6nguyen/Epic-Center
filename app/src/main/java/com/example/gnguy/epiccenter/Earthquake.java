@@ -8,20 +8,18 @@ public class Earthquake {
 
     private String mMagnitude;
     private String mLocation;
-    private String mDate;
+    private long mTimeInMilliseconds;
 
     // Constructor
-    public Earthquake(String mag, String location, String date){
+    public Earthquake(String mag, String location, long time){
         mMagnitude = mag;
         mLocation = location;
-        mDate = date;
+        mTimeInMilliseconds = time;
     }
 
     // Accessor Methods
     public String getMagnitutude(){return mMagnitude; }
     public String getLocation(){return mLocation;}
-    public String getDate(){return mDate;}
-
-
+    public long getmTimeInMilliseconds(){return mTimeInMilliseconds;}
 
 }
