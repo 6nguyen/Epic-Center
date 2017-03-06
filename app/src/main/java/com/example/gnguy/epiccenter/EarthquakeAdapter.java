@@ -39,12 +39,31 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
         // Display magnitude of current earthquake into above TextView
         magnitudeView.setText(currentEarthquake.getMagnitutude());
 
-        // Find the TextView with the ID location
-        TextView locationView = (TextView)listItemView.findViewById(R.id.location);
-        // Display location of current earthquake into above TextView
-        locationView.setText(currentEarthquake.getLocation());
 
-        // Convert the timeInMilliseconds to a String with date format
+        // Convert the String mLocation into two Strings, a primary location and location offset
+        String location = new String(currentEarthquake.getLocation());
+        String locationOffset = null;
+        String primaryLocation = null;
+        if (location.contains(" of ")){
+            int endIndex = location.indexOf(" of") + 4;
+            locationOffset = location.substring(0,endIndex);
+            primaryLocation = location.substring(endIndex, location.length());
+        } else {
+            locationOffset = "Near the ";
+            primaryLocation = location;
+        }
+
+        // Location offset
+        TextView locationOffsetView = (TextView)listItemView.findViewById(R.id.location_offset);
+        locationOffsetView.setText(locationOffset);
+
+        // Find the TextView with the ID location
+        TextView primaryView = (TextView)listItemView.findViewById(R.id.primary_location);
+        // Display location of current earthquake into above TextView
+        primaryView.setText(primaryLocation);
+
+
+        // Convert the long mTimeInMilliseconds to a String with date format
         Date dateObject = new Date(currentEarthquake.getmTimeInMilliseconds());
         SimpleDateFormat dateFormatter = new SimpleDateFormat("MMM DD, yyyy");
         String date = dateFormatter.format(dateObject);
