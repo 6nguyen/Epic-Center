@@ -9,17 +9,20 @@ public class Earthquake {
     private double mMagnitude;
     private String mLocation;
     private long mTimeInMilliseconds;
+    private String mUrl;
 
     // Constructor
-    public Earthquake(double mag, String location, long time){
+    public Earthquake(double mag, String location, long time, String url){
         mMagnitude = mag;
         mLocation = location;
         mTimeInMilliseconds = time;
+        mUrl = url;
     }
 
     // Accessor Methods
     public double getMagnitutude(){return mMagnitude; }
     public String getLocation(){return mLocation;}
     public long getmTimeInMilliseconds(){return mTimeInMilliseconds;}
+    public String getUrl(){return mUrl;}
 
 }
