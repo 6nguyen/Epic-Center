@@ -76,9 +76,12 @@ public final class QueryUtils {
                 // Extract “time” for date
                 long time = properties.getLong("time");
 
+                // Extract "url" for clickable url
+                String url = properties.getString("url");
+
                 // Create Earthquake java object from magnitude, location, and time
                 // Add earthquake to list of earthquakes
-                earthquakes.add(new Earthquake(mag, place, time));
+                earthquakes.add(new Earthquake(mag, place, time, url));
 
             }
         } catch (JSONException e) {
