@@ -20,6 +20,7 @@
 
     <!-- TextViews for location offset and primary location -->
     <LinearLayout
+        android:id="@+id/location_container"
         android:paddingLeft="16dp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -31,19 +32,29 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="74km NW of"/>
+            android:textColor="@color/textColorLocationOffset"
+            android:maxLines="1"
+            android:fontFamily="sans-serif-medium"
+            android:textSize="12sp"
+            android:text="74km NW of" />
 
         <TextView
             android:id="@+id/primary_location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Los Angeles"/>
+            android:textColor="@color/textColorLocationPrimary"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:fontFamily="sans-serif-medium"
+            android:textSize="16sp"
+            android:text="Gettysburgvilleshire Hamptontown, New Saint Orleansingtonana"/>
 
     </LinearLayout>
 
 <!-- Textviews for date and time -->
     <LinearLayout
+        android:id="@+id/date_container"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="2"
@@ -63,7 +74,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_gravity="end"
-            android:text="8:00 PM"/>
+            android:text="8:27 PM"/>
 
     </LinearLayout>
 

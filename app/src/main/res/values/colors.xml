@@ -4,6 +4,13 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
+    <!-- Text color for the location offset of the earthquake in the list item -->
+    <color name="textColorLocationOffset">#B4BAC0</color>
+
+    <!-- Text color for the primary location of the earthquake in the list item -->
+    <color name="textColorLocationPrimary">#2B3D4D</color>
+
+
     <!-- Color for an earthquake with magnitude 0 and 2 -->
     <color name="magnitude1">#0099FF</color>
 

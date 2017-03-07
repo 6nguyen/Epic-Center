@@ -144,6 +144,7 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
                 magnitudeColorResourceId = R.color.magnitude10plus;
                 break;
         }
+        // ContextCompat.getColor converts the color resource ID into an actual integer color value
         return ContextCompat.getColor(getContext(), magnitudeColorResourceId);
     }
 }
