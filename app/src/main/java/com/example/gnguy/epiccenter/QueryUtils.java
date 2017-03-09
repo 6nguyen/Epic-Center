@@ -68,7 +68,53 @@ public final class QueryUtils {
              // Convert SAMPLE_JSON_RESPONSE String into a JSONObject
             JSONObject root = new JSONObject(SAMPLE_JSON_RESPONSE);
 
-             // Extract “features” JSONArray
+    /**
+     * Make an HTTP request to the given URL and return a String as the response.
+     *  Attempt to connect to the given URL and establish the InputStream if
+     *  successful, or log an error.
+     */
+    private static String makeHttpRequest(URL url) throws IOException {
+        String jsonResponse = "";
+
+        // if the URL is null, return early from method
+        if (url == null) {
+            return jsonResponse;
+        }
+
+        HttpURLConnection urlConnection = null;
+        InputStream inputStream = null;
+        try {
+            urlConnection = (HttpURLConnection) url.openConnection();
+            urlConnection.setReadTimeout(10000 /* milliseconds */);
+            urlConnection.setConnectTimeout(15000 /* milliseconds */);
+            urlConnection.setRequestMethod("GET");
+            urlConnection.connect();
+
+            // if the request was successful (response code: 200), read the input and parse response
+            if (urlConnection.getResponseCode() == 200){
+                inputStream = urlConnection.getInputStream();
+                jsonResponse = readFromStream(inputStream);
+            } else {
+                Log.e(LOG_TAG, "Error response code: " + urlConnection.getResponseCode());
+            }
+        } catch (IOException e) {
+            Log.e(LOG_TAG, "Problem retrieving the earthquake JSON results.", e);
+        }
+        // Regardless of whether the request was successful, disconnect the connection
+        // and close the inputStream when done
+        finally {
+            if (urlConnection != null) {
+                urlConnection.disconnect();
+            }
+            if (inputStream != null) {
+                inputStream.close();
+            }
+        }
+        return jsonResponse;
+    }
+
+
+
             JSONArray featuresArray = root.getJSONArray("features");
 
              // Loop through each feature in the array
