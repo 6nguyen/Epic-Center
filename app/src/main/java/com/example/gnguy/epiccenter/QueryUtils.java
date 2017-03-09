@@ -154,4 +154,24 @@ public final class QueryUtils {
         return earthquakes;
     }
 
-}
+}    /**
+     *  Convert the InputStream into a String which contains the entire JSON response
+     *  from the server
+     */
+    private static String readFromStream(InputStream inputStream)throws IOException {
+        /** Create a StringBuilder object that creates a string by appending smaller strings
+         *  piece by piece
+         */
+        StringBuilder output = new StringBuilder();
+        if (inputStream != null){
+            InputStreamReader inputStreamReader = new InputStreamReader(inputStream, Charset.forName("UTF-8"));
+            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+            String line = bufferedReader.readLine();
+            while(line != null) {
+                output.append(line);
+                line = bufferedReader.readLine();
+            }
+        }
+        return output.toString();
+    }
+
