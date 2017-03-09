@@ -52,5 +52,64 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // TODO Create an {@link AsyncTask} to perform the HTTP request to the given URL
+        // on a background thread. When the result is received on the main UI thread,
+        // then update the UI.
+        EarthquakeAsyncTask task = new EarthquakeAsyncTask();
+        task.execute(EARTHQUAKE_REQUEST_URL);
+
     }
+
+    /**
+     *  Update the UI with the given earthquake list information
+     */
+    private void updateUI(List<Earthquake> earthquakeData){
+        mAdapter.clear();
+        if (earthquakeData != null && !earthquakeData.isEmpty()){
+            mAdapter.addAll(earthquakeData);
+        }
+    }
+
+
+
+    /**
+     *  {@link AsyncTask} to perform the network request on a background thread, and then
+     * update the UI with the list of earthquakeList from the response.
+     */
+    private class EarthquakeAsyncTask extends AsyncTask<String, Void, List<Earthquake>> {
+
+        @Override
+        protected List<Earthquake> doInBackground(String... urls) {
+            if (urls.length < 1 || urls[0] == null) {
+                return null;
+            }
+
+            List<Earthquake> result = QueryUtils.fetchEarthquakeData(urls[0]);
+            return result;
+        }
+
+        /**
+         * This method is invoked on the main UI thread after the background work has been
+         * completed.
+         */
+        @Override
+        protected void onPostExecute(List<Earthquake> earthquakeData) {
+            mAdapter.clear();
+            if (earthquakeData != null && !earthquakeData.isEmpty()) {
+                mAdapter.addAll(earthquakeData);
+            }
+
+           /*
+            if (result == null) {
+                return;
+            }
+            updateUI(result);
+        }
+        */
+        }
+
+
+    }
+
+
 }
