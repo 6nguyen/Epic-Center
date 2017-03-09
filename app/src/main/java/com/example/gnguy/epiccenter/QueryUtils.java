@@ -115,33 +115,48 @@ public final class QueryUtils {
 
 
 
+
+    /**
+     * extractEarthquakeFeatures
+     * Return a list of {@link Earthquake} objects that has been built up from
+     * parsing a JSON response.
+     */
+    public static List<Earthquake> extractEarthquakeFeatures(String earthqaukeJsonResponse) {
+        // if the requestUrl is empty or null, return null and exit early
+        if (TextUtils.isEmpty(earthqaukeJsonResponse)){
+            return null;
+        }
+        // Create an empty List that we can start adding Earthquake objects to
+        List<Earthquake> earthquakeList = new ArrayList<>();
+
+        // Parse the JSONrequestUrl to extract all necessary features
+        // Catch the exception so the app doesn't crash, and print the error message to the logs.
+        try {
+             // Convert JSONrequestUrl String into a JSONObject
+            // Extract “features” JSONArray
+            JSONObject root = new JSONObject(earthqaukeJsonResponse);
             JSONArray featuresArray = root.getJSONArray("features");
 
-             // Loop through each feature in the array
+            /** Loop through each feature in the array
+             * Get earthquake JSONObject at position i
+             * Get “properties” JSONObject
+             * Extract “mag” for magnitude
+             * Extract "place" for location
+             * Extract "time" for date
+             * Extract "url" for clickable url
+             */
             for (int i=0; i<featuresArray.length(); i++){
 
-                // Get earthquake JSONObject at position i
                 JSONObject currentEarthquake = featuresArray.getJSONObject(i);
-
-                // Get “properties” JSONObject
                 JSONObject properties = currentEarthquake.getJSONObject("properties");
-
-                // Extract “mag” for magnitude
                 double mag = properties.getDouble("mag");
-
-                // Extract “place” for location
                 String place = properties.getString("place");
-
-                // Extract “time” for date
                 long time = properties.getLong("time");
-
-                // Extract "url" for clickable url
                 String url = properties.getString("url");
 
-                // Create Earthquake java object from magnitude, location, and time
-                // Add earthquake to list of earthquakes
-                earthquakes.add(new Earthquake(mag, place, time, url));
-
+                // Create a new Earthquake object from magnitude, location, time, and url
+                // Add Earthquake object to List<earthquakeList>
+                earthquakeList.add(new Earthquake(mag, place, time, url));
             }
         } catch (JSONException e) {
             // If an error is thrown when executing any of the above statements in the "try" block,
@@ -149,29 +164,12 @@ public final class QueryUtils {
             // with the message from the exception.
             Log.e("QueryUtils", "Problem parsing the earthquake JSON results", e);
         }
-
-        // Return the list of earthquakes
-        return earthquakes;
+        // Return the list of earthquakeList
+        return earthquakeList;
     }
 
-}    /**
-     *  Convert the InputStream into a String which contains the entire JSON response
-     *  from the server
-     */
-    private static String readFromStream(InputStream inputStream)throws IOException {
-        /** Create a StringBuilder object that creates a string by appending smaller strings
-         *  piece by piece
-         */
-        StringBuilder output = new StringBuilder();
-        if (inputStream != null){
-            InputStreamReader inputStreamReader = new InputStreamReader(inputStream, Charset.forName("UTF-8"));
-            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-            String line = bufferedReader.readLine();
-            while(line != null) {
-                output.append(line);
-                line = bufferedReader.readLine();
-            }
-        }
-        return output.toString();
-    }
 
+
+
+
+}
