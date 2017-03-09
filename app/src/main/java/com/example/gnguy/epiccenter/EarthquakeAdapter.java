@@ -22,8 +22,8 @@ import java.util.List;
 
 public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
 
-    public EarthquakeAdapter(Context context, List<Earthquake> earthquakes) {
-        super(context, 0, earthquakes);
+    public EarthquakeAdapter(Context context, List<Earthquake> earthquakeList) {
+        super(context, 0, earthquakeList);
     }
 
     @Override
