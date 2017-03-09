@@ -2,35 +2,41 @@ package com.example.gnguy.epiccenter;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final String LOG_TAG = MainActivity.class.getName();
+    private static final String LOG_TAG = MainActivity.class.getName();
+
+    /** Adapter for the earthquakeList */
+    private EarthquakeAdapter mAdapter;
+
+    /** URL for the earthquake data from the USGS dataset */
+    private static final String EARTHQUAKE_REQUEST_URL =
+            // "http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&orderby=time&minmag=5&limit=10";
+             "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&orderby=time&minmag=3&limit=10&starttime=2017-01-01";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Extraxt list of earthquake details
-        ArrayList<Earthquake> earthquakes = QueryUtils.extractEarthquakes();
-
         // Find a reference to the {@link ListView} in the layout
         ListView listView = (ListView)findViewById(R.id.list_view);
 
-        // Create a new {@link ArrayAdapter} of earthquakes
-        final EarthquakeAdapter adapter = new EarthquakeAdapter(this, earthquakes);
+        // Create a new {@link ArrayAdapter} of earthquakeList
+        mAdapter = new EarthquakeAdapter(this, new ArrayList<Earthquake>());
 
         // Set the adapter onto the {@link ListVIew} so the list can be populated in the UI
-        listView.setAdapter(adapter);
+        listView.setAdapter(mAdapter);
 
         // Set listView items to open earthquake url when clicked
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
@@ -38,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 // Find the earthquake at the given position
-                Earthquake currentEarthquake = adapter.getItem(position);
+                Earthquake currentEarthquake = mAdapter.getItem(position);
 
                 // Parse mUrl to a readable Uri
                 Uri earthquakeUri = Uri.parse(currentEarthquake.getUrl());
