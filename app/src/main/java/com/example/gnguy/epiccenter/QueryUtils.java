@@ -48,12 +48,22 @@ public final class QueryUtils {
         // Create an empty ArrayList that we can start adding earthquakes to
         ArrayList<Earthquake> earthquakes = new ArrayList<>();
 
-        // Try to parse the SAMPLE_JSON_RESPONSE. If there's a problem with the way the JSON
-        // is formatted, a JSONException exception object will be thrown.
-        // Catch the exception so the app doesn't crash, and print the error message to the logs.
+
+
+
+    /**
+     * @return new URL object from the given url string
+     */
+    private static URL createUrl(String urlString){
+        URL url = null;
         try {
-            // TODO: Parse the response given by the SAMPLE_JSON_RESPONSE string and
-            // build up a list of Earthquake objects with the corresponding data.
+            url = new URL(urlString);
+        } catch (MalformedURLException mue){
+            Log.e(LOG_TAG, "Error with building URL from given url String.", mue);
+        }
+        return url;
+    }
+
 
              // Convert SAMPLE_JSON_RESPONSE String into a JSONObject
             JSONObject root = new JSONObject(SAMPLE_JSON_RESPONSE);
