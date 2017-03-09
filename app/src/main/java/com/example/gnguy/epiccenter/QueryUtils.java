@@ -39,15 +39,29 @@ public final class QueryUtils {
     private QueryUtils() {
     }
 
+
     /**
-     * Return a list of {@link Earthquake} objects that has been built up from
-     * parsing a JSON response.
+     *  Query the USGS data set and create an List<Earthquake> to represent
+     *  a list of earthquakeList.
+     *  @return List<Earthquake>
      */
-    public static ArrayList<Earthquake> extractEarthquakes() {
+    public static List<Earthquake> fetchEarthquakeData(String requestUrl){
+        // create a URL object from given url
+        URL url = createUrl(requestUrl);
 
-        // Create an empty ArrayList that we can start adding earthquakes to
-        ArrayList<Earthquake> earthquakes = new ArrayList<>();
+        // Perform HTTP request to the URL and receive a JSON response back
+        String jsonResponse = null;
+        try {
+            jsonResponse = makeHttpRequest(url);
+        } catch (IOException e) {
+            Log.e(LOG_TAG, "Error making the HTTP request.", e);
+        }
 
+        // Extract relevant fields from the JSON response and create List<Earthquake>
+        List<Earthquake> earthquakeList = extractEarthquakeFeatures(jsonResponse);
+
+        return earthquakeList;
+    }
 
 
 
@@ -65,8 +79,6 @@ public final class QueryUtils {
     }
 
 
-             // Convert SAMPLE_JSON_RESPONSE String into a JSONObject
-            JSONObject root = new JSONObject(SAMPLE_JSON_RESPONSE);
 
     /**
      * Make an HTTP request to the given URL and return a String as the response.
@@ -113,6 +125,28 @@ public final class QueryUtils {
         return jsonResponse;
     }
 
+
+
+    /**
+     *  Convert the InputStream into a String which contains the entire JSON response
+     *  from the server
+     */
+    private static String readFromStream(InputStream inputStream)throws IOException {
+        /** Create a StringBuilder object that creates a string by appending smaller strings
+         *  piece by piece
+         */
+        StringBuilder output = new StringBuilder();
+        if (inputStream != null){
+            InputStreamReader inputStreamReader = new InputStreamReader(inputStream, Charset.forName("UTF-8"));
+            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+            String line = bufferedReader.readLine();
+            while(line != null) {
+                output.append(line);
+                line = bufferedReader.readLine();
+            }
+        }
+        return output.toString();
+    }
 
 
 
