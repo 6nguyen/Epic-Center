@@ -47,9 +47,11 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
         // Set the adapter onto the {@link ListVIew} so the list can be populated in the UI
         listView.setAdapter(mAdapter);
 
-        //***************************************************************************************************
+        // Get a reference to the LoaderManager, to interact with loaders
+        // Initiate the loader with parameters loaderID, bypass the bundle, and pass in this
+        // activity for LoaderCallbacks param.
         LoaderManager loaderManager = getLoaderManager();
-        loaderManager.initLoader(1, null, this);
+        loaderManager.initLoader(LOADER_ID, null, this);
 
         // Set listView items to open earthquake url when clicked
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
@@ -71,7 +73,7 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
             }
         });
 
-        // TODO Create an {@link AsyncTask} to perform the HTTP request to the given URL
+        // Create an {@link AsyncTask} to perform the HTTP request to the given URL
         // on a background thread. When the result is received on the main UI thread,
         // then update the UI.
         //EarthquakeAsyncTask task = new EarthquakeAsyncTask();

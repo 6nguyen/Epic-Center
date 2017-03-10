@@ -81,7 +81,7 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
 
         // Convert the long mTimeInMilliseconds to a String with date format
         Date dateObject = new Date(currentEarthquake.getmTimeInMilliseconds());
-            SimpleDateFormat dateFormatter = new SimpleDateFormat("MMM DD, yyyy");
+            SimpleDateFormat dateFormatter = new SimpleDateFormat("MMM d, yyyy");
             String date = dateFormatter.format(dateObject);
 
             // Find the TextView with the ID date
@@ -90,7 +90,7 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
             dateView.setText(date);
 
             // Convert the timeInMilliseconds to a String with time format
-            SimpleDateFormat timeFormatter = new SimpleDateFormat("h:mm a");
+            SimpleDateFormat timeFormatter = new SimpleDateFormat("h:mm:ss a");
             String time = timeFormatter.format(dateObject);
 
             // Find the TextView with the ID time
