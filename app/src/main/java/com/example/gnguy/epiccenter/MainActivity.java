@@ -1,8 +1,14 @@
 package com.example.gnguy.epiccenter;
 
+import android.content.AsyncTaskLoader;
+import android.content.Context;
 import android.content.Intent;
+import android.content.Loader;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.app.LoaderManager;
+import android.app.LoaderManager.LoaderCallbacks;
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -12,12 +18,15 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements LoaderCallbacks<List<Earthquake>> {
 
     private static final String LOG_TAG = MainActivity.class.getName();
 
     /** Adapter for the earthquakeList */
     private EarthquakeAdapter mAdapter;
+
+    /** ID number for AsyncTaskLoader */
+    private static final int LOADER_ID = 1;
 
     /** URL for the earthquake data from the USGS dataset */
     private static final String EARTHQUAKE_REQUEST_URL =
@@ -37,6 +46,10 @@ public class MainActivity extends AppCompatActivity {
 
         // Set the adapter onto the {@link ListVIew} so the list can be populated in the UI
         listView.setAdapter(mAdapter);
+
+        //***************************************************************************************************
+        LoaderManager loaderManager = getLoaderManager();
+        loaderManager.initLoader(1, null, this);
 
         // Set listView items to open earthquake url when clicked
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
@@ -61,8 +74,10 @@ public class MainActivity extends AppCompatActivity {
         // TODO Create an {@link AsyncTask} to perform the HTTP request to the given URL
         // on a background thread. When the result is received on the main UI thread,
         // then update the UI.
-        EarthquakeAsyncTask task = new EarthquakeAsyncTask();
-        task.execute(EARTHQUAKE_REQUEST_URL);
+        //EarthquakeAsyncTask task = new EarthquakeAsyncTask();
+        //task.execute(EARTHQUAKE_REQUEST_URL);
+        EarthquakeAsyncLoader task = new EarthquakeAsyncLoader(MainActivity.this, EARTHQUAKE_REQUEST_URL);
+        task.onStartLoading();
 
     }
 
@@ -77,11 +92,32 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * Three abstract callback methods necessary for AsyncTaskLoader     *
+     */
+    @Override
+    public Loader<List<Earthquake>> onCreateLoader(int i, Bundle bundle) {
+        return new EarthquakeAsyncLoader(this, EARTHQUAKE_REQUEST_URL);
+    }
+
+    @Override
+    public void onLoadFinished(Loader<List<Earthquake>> loader, List<Earthquake> data) {
+        mAdapter.clear();
+        if (data != null && !data.isEmpty()) {
+            mAdapter.addAll(data);
+        }
+    }
+
+    @Override
+    public void onLoaderReset(Loader<List<Earthquake>> loader) {
+        mAdapter.clear();
+    }
+
 
     /**
      *  {@link AsyncTask} to perform the network request on a background thread, and then
      * update the UI with the list of earthquakeList from the response.
-     */
+     */ /**
     private class EarthquakeAsyncTask extends AsyncTask<String, Void, List<Earthquake>> {
 
         @Override
@@ -97,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
         /**
          * This method is invoked on the main UI thread after the background work has been
          * completed.
-         */
+         */ /**
         @Override
         protected void onPostExecute(List<Earthquake> earthquakeData) {
             mAdapter.clear();
@@ -111,11 +147,10 @@ public class MainActivity extends AppCompatActivity {
             }
             updateUI(result);
         }
-        */
+        */ /*
         }
+    }  */
 
-
-    }
 
 
 }
