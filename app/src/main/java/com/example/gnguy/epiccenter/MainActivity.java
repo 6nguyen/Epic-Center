@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,8 +32,10 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
 
     /** URL for the earthquake data from the USGS dataset */
     private static final String EARTHQUAKE_REQUEST_URL =
-            // "http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&orderby=time&minmag=5&limit=10";
-             "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&orderby=time&minmag=3&limit=10&starttime=2017-01-01";
+        // USGS http request for a max of 10 earthquakes with min mag 3, starting from Jan 1, 2017
+        "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&orderby=time&minmag=3&limit=10&starttime=2017-01-01";
+        // Test http url request for no earthquakes fetched, ie earthquakes starting from Jan 1, 2100
+        //"https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&orderby=time&minmag=3&limit=10&starttime=2100-01-01";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +44,9 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
 
         // Find a reference to the {@link ListView} in the layout
         ListView listView = (ListView)findViewById(R.id.list_view);
+        /**if (listView == null){
+            listView.setEmptyView(findViewById(R.id.empty_view));
+        } */
 
         // Create a new {@link ArrayAdapter} of earthquakeList
         mAdapter = new EarthquakeAdapter(this, new ArrayList<Earthquake>());
@@ -53,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
         // activity for LoaderCallbacks param.
         LoaderManager loaderManager = getLoaderManager();
         loaderManager.initLoader(LOADER_ID, null, this);
-        Log.e(LOG_TAG, "LoaderManager initialized with initLoader");
+        Log.e(LOG_TAG, "TEST: LoaderManager initialized with initLoader");
 
         // Set listView items to open earthquake url when clicked
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
@@ -101,7 +107,7 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
      */
     @Override
     public Loader<List<Earthquake>> onCreateLoader(int i, Bundle bundle) {
-        Log.e(LOG_TAG, "Loader created onCreateLoader.");
+        Log.e(LOG_TAG, "TEST: Loader created onCreateLoader.");
         return new EarthquakeAsyncLoader(this, EARTHQUAKE_REQUEST_URL);
     }
 
@@ -110,14 +116,14 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
         mAdapter.clear();
         if (data != null && !data.isEmpty()) {
             mAdapter.addAll(data);
-            Log.e(LOG_TAG, "Finished loader onLoadFinished");
+            Log.e(LOG_TAG, "TEST: Finished loader onLoadFinished");
         }
     }
 
     @Override
     public void onLoaderReset(Loader<List<Earthquake>> loader) {
         mAdapter.clear();
-        Log.e(LOG_TAG, "Loader reset.  onLoaderReset.");
+        Log.e(LOG_TAG, "TEST: Loader reset.  onLoaderReset.");
     }
 
 
