@@ -11,6 +11,7 @@ import android.app.LoaderManager.LoaderCallbacks;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -52,6 +53,7 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
         // activity for LoaderCallbacks param.
         LoaderManager loaderManager = getLoaderManager();
         loaderManager.initLoader(LOADER_ID, null, this);
+        Log.e(LOG_TAG, "LoaderManager initialized with initLoader");
 
         // Set listView items to open earthquake url when clicked
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
@@ -99,6 +101,7 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
      */
     @Override
     public Loader<List<Earthquake>> onCreateLoader(int i, Bundle bundle) {
+        Log.e(LOG_TAG, "Loader created onCreateLoader.");
         return new EarthquakeAsyncLoader(this, EARTHQUAKE_REQUEST_URL);
     }
 
@@ -107,12 +110,14 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
         mAdapter.clear();
         if (data != null && !data.isEmpty()) {
             mAdapter.addAll(data);
+            Log.e(LOG_TAG, "Finished loader onLoadFinished");
         }
     }
 
     @Override
     public void onLoaderReset(Loader<List<Earthquake>> loader) {
         mAdapter.clear();
+        Log.e(LOG_TAG, "Loader reset.  onLoaderReset.");
     }
 
 

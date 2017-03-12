@@ -2,6 +2,7 @@ package com.example.gnguy.epiccenter;
 
 import android.content.AsyncTaskLoader;
 import android.content.Context;
+import android.util.Log;
 
 import java.util.List;
 
@@ -22,6 +23,7 @@ public class EarthquakeAsyncLoader extends AsyncTaskLoader<List<Earthquake>> {
     @Override
     protected void onStartLoading() {
         forceLoad();
+        Log.e(LOG_TAG, "onStartLoading:  forceLoad();");
     }
 
     @Override
@@ -32,6 +34,7 @@ public class EarthquakeAsyncLoader extends AsyncTaskLoader<List<Earthquake>> {
         }
 
         List<Earthquake> result = QueryUtils.fetchEarthquakeData(mUrl);
+        Log.e(LOG_TAG, "fetching request url into AsyncTaskLoader.");
         return result;
     }
 
