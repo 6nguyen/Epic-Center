@@ -12,10 +12,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.view.View.GONE;
 
 public class MainActivity extends AppCompatActivity implements LoaderCallbacks<List<Earthquake>> {
 
@@ -31,12 +34,18 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
     /** Empty textView for http requests that query empty earthquake results */
     private TextView mEmptyView;
 
+    /** Loading indicator circle that displays progress */
+    private ProgressBar mIndicatorCircle;
+
     /** URL for the earthquake data from the USGS dataset */
     private static final String EARTHQUAKE_REQUEST_URL =
-        // USGS http request for a max of 10 earthquakes with min mag 3, starting from Jan 1, 2017
+        /** USGS http request for a max of 10 earthquakes with min mag 3, starting from Jan 1, 2017 */
         "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&orderby=time&minmag=3&limit=10&starttime=2017-01-01";
-        // Test http url request for no earthquakes fetched, ie earthquakes starting from Jan 1, 2100
+        /** Test http url request for no earthquakes fetched (mEmptyView) */
         //"https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&orderby=time&minmag=3&limit=10&starttime=2100-01-01";
+        /** Test http request with a lot of earthquake data to load (mIndicatorCircle) */
+        //"https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&orderby=time&minmag=3&limit=100&starttime=2017-01-01";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +63,12 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
         // Set the adapter onto the {@link ListVIew} so the list can be populated in the UI
         listView.setAdapter(mAdapter);
 
+        // Find a reference to the mEmptyView
         mEmptyView = (TextView)findViewById(R.id.empty_view);
         listView.setEmptyView(mEmptyView);
+
+        // Find a reference to the mIndicatorCircle
+        mIndicatorCircle = (ProgressBar)findViewById(R.id.progress_indicator);
 
         // Set listView items to open earthquake url when clicked
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
@@ -111,9 +124,11 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
     public void onLoadFinished(Loader<List<Earthquake>> loader, List<Earthquake> data) {
         mAdapter.clear();
         if (data != null && !data.isEmpty()) {
+            mIndicatorCircle.setVisibility(GONE);
             mAdapter.addAll(data);
         }
         // If no earthquake data was queried
+        mIndicatorCircle.setVisibility(GONE);
         mEmptyView.setText(R.string.empty_view_string);
         Log.e(LOG_TAG, "TEST: Finished loader onLoadFinished");
     }
