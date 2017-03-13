@@ -23,18 +23,17 @@ public class EarthquakeAsyncLoader extends AsyncTaskLoader<List<Earthquake>> {
     @Override
     protected void onStartLoading() {
         forceLoad();
-        Log.e(LOG_TAG, "onStartLoading:  forceLoad();");
+        Log.e(LOG_TAG, "TEST: Loading AsyncTaskLoaer onStartLoading forceLoad();");
     }
 
     @Override
     public List<Earthquake> loadInBackground( ) {
-
+        Log.e(LOG_TAG, "TEST: loadInBackground is called.");
         if (mUrl == null) {
             return null;
         }
 
         List<Earthquake> result = QueryUtils.fetchEarthquakeData(mUrl);
-        Log.e(LOG_TAG, "fetching request url into AsyncTaskLoader.");
         return result;
     }
 
