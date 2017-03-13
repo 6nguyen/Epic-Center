@@ -2,7 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.gnguy.epiccenter">
 
+    <!-- Allow app internet access -->
     <uses-permission android:name="android.permission.INTERNET"/>
+    <!-- Allow app check network connection -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"

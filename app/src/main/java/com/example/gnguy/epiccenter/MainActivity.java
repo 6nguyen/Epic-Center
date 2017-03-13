@@ -42,10 +42,10 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
     /** URL for the earthquake data from the USGS dataset */
     private static final String EARTHQUAKE_REQUEST_URL =
         /** USGS http request for a max of 10 earthquakes with min mag 3, starting from Jan 1, 2017 */
-        //"https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&orderby=time&minmag=3&limit=10&starttime=2017-01-01";
+        "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&orderby=time&minmag=3&limit=10&starttime=2017-01-01";
 
         /** Test http url request for no earthquakes fetched (mEmptyView) */
-        "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&orderby=time&minmag=3&limit=10&starttime=2100-01-01";
+        //"https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&orderby=time&minmag=3&limit=10&starttime=2100-01-01";
 
         /** Test http request with a lot of earthquake data to load (mIndicatorCircle) */
         //"https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&orderby=time&minmag=3&limit=1000&starttime=2017-01-01";
