@@ -2,6 +2,7 @@ package com.example.gnguy.epiccenter;
 
 import android.content.Intent;
 import android.content.Loader;
+import android.graphics.Color;
 import android.net.Uri;
 import android.app.LoaderManager;
 import android.app.LoaderManager.LoaderCallbacks;
@@ -37,14 +38,17 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
     /** Loading indicator circle that displays progress */
     private ProgressBar mIndicatorCircle;
 
+
     /** URL for the earthquake data from the USGS dataset */
     private static final String EARTHQUAKE_REQUEST_URL =
         /** USGS http request for a max of 10 earthquakes with min mag 3, starting from Jan 1, 2017 */
-        "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&orderby=time&minmag=3&limit=10&starttime=2017-01-01";
+        //"https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&orderby=time&minmag=3&limit=10&starttime=2017-01-01";
+
         /** Test http url request for no earthquakes fetched (mEmptyView) */
-        //"https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&orderby=time&minmag=3&limit=10&starttime=2100-01-01";
+        "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&orderby=time&minmag=3&limit=10&starttime=2100-01-01";
+
         /** Test http request with a lot of earthquake data to load (mIndicatorCircle) */
-        //"https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&orderby=time&minmag=3&limit=100&starttime=2017-01-01";
+        //"https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&orderby=time&minmag=3&limit=1000&starttime=2017-01-01";
 
 
     @Override
@@ -67,8 +71,10 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
         mEmptyView = (TextView)findViewById(R.id.empty_view);
         listView.setEmptyView(mEmptyView);
 
-        // Find a reference to the mIndicatorCircle
+        // Find a reference to the mIndicatorCircle and set the color to pale blue
         mIndicatorCircle = (ProgressBar)findViewById(R.id.progress_indicator);
+        mIndicatorCircle.getIndeterminateDrawable().setColorFilter(Color.parseColor("#80DAEB"),
+                android.graphics.PorterDuff.Mode.MULTIPLY);
 
         // Set listView items to open earthquake url when clicked
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
@@ -122,15 +128,19 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
 
     @Override
     public void onLoadFinished(Loader<List<Earthquake>> loader, List<Earthquake> data) {
-        mAdapter.clear();
-        if (data != null && !data.isEmpty()) {
-            mIndicatorCircle.setVisibility(GONE);
-            mAdapter.addAll(data);
-        }
-        // If no earthquake data was queried
         mIndicatorCircle.setVisibility(GONE);
+
+        // If no earthquake data was queried, display mEmptyView
         mEmptyView.setText(R.string.empty_view_string);
         Log.e(LOG_TAG, "TEST: Finished loader onLoadFinished");
+
+        // Remove all previous earthquake data
+        mAdapter.clear();
+
+        // If there is earthquake data to display
+        if (data != null && !data.isEmpty()) {
+            mAdapter.addAll(data);
+        }
     }
 
     @Override
