@@ -1,11 +1,8 @@
 package com.example.gnguy.epiccenter;
 
-import android.content.AsyncTaskLoader;
-import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.app.LoaderManager;
 import android.app.LoaderManager.LoaderCallbacks;
 
@@ -22,6 +19,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements LoaderCallbacks<List<Earthquake>> {
 
+    /** Short cut for log tag parameter */
     private static final String LOG_TAG = MainActivity.class.getName();
 
     /** Adapter for the earthquakeList */
@@ -29,6 +27,9 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
 
     /** ID number for AsyncTaskLoader */
     private static final int LOADER_ID = 1;
+
+    /** Empty textView for http requests that query empty earthquake results */
+    private TextView mEmptyView;
 
     /** URL for the earthquake data from the USGS dataset */
     private static final String EARTHQUAKE_REQUEST_URL =
@@ -40,26 +41,21 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.e(LOG_TAG, "TEST: MainActivity onCreate method called.");
         setContentView(R.layout.activity_main);
 
         // Find a reference to the {@link ListView} in the layout
         ListView listView = (ListView)findViewById(R.id.list_view);
-        /**if (listView == null){
-            listView.setEmptyView(findViewById(R.id.empty_view));
-        } */
 
         // Create a new {@link ArrayAdapter} of earthquakeList
         mAdapter = new EarthquakeAdapter(this, new ArrayList<Earthquake>());
 
+
         // Set the adapter onto the {@link ListVIew} so the list can be populated in the UI
         listView.setAdapter(mAdapter);
 
-        // Get a reference to the LoaderManager, to interact with loaders
-        // Initiate the loader with parameters loaderID, bypass the bundle, and pass in this
-        // activity for LoaderCallbacks param.
-        LoaderManager loaderManager = getLoaderManager();
-        loaderManager.initLoader(LOADER_ID, null, this);
-        Log.e(LOG_TAG, "TEST: LoaderManager initialized with initLoader");
+        mEmptyView = (TextView)findViewById(R.id.empty_view);
+        listView.setEmptyView(mEmptyView);
 
         // Set listView items to open earthquake url when clicked
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
@@ -81,13 +77,13 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
             }
         });
 
-        // Create an {@link AsyncTask} to perform the HTTP request to the given URL
-        // on a background thread. When the result is received on the main UI thread,
-        // then update the UI.
-        //EarthquakeAsyncTask task = new EarthquakeAsyncTask();
-        //task.execute(EARTHQUAKE_REQUEST_URL);
-        EarthquakeAsyncLoader task = new EarthquakeAsyncLoader(MainActivity.this, EARTHQUAKE_REQUEST_URL);
-        task.onStartLoading();
+
+        // Get a reference to the LoaderManager, to interact with loaders
+        // Initiate the loader with parameters loaderID, bypass the bundle, and pass in this
+        // activity for LoaderCallbacks param.
+        LoaderManager loaderManager = getLoaderManager();
+        loaderManager.initLoader(LOADER_ID, null, this);
+        Log.e(LOG_TAG, "TEST: LoaderManager initialized with initLoader");
 
     }
 
@@ -116,8 +112,10 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
         mAdapter.clear();
         if (data != null && !data.isEmpty()) {
             mAdapter.addAll(data);
-            Log.e(LOG_TAG, "TEST: Finished loader onLoadFinished");
         }
+        // If no earthquake data was queried
+        mEmptyView.setText(R.string.empty_view_string);
+        Log.e(LOG_TAG, "TEST: Finished loader onLoadFinished");
     }
 
     @Override
@@ -125,44 +123,6 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
         mAdapter.clear();
         Log.e(LOG_TAG, "TEST: Loader reset.  onLoaderReset.");
     }
-
-
-    /**
-     *  {@link AsyncTask} to perform the network request on a background thread, and then
-     * update the UI with the list of earthquakeList from the response.
-     */ /**
-    private class EarthquakeAsyncTask extends AsyncTask<String, Void, List<Earthquake>> {
-
-        @Override
-        protected List<Earthquake> doInBackground(String... urls) {
-            if (urls.length < 1 || urls[0] == null) {
-                return null;
-            }
-
-            List<Earthquake> result = QueryUtils.fetchEarthquakeData(urls[0]);
-            return result;
-        }
-
-        /**
-         * This method is invoked on the main UI thread after the background work has been
-         * completed.
-         */ /**
-        @Override
-        protected void onPostExecute(List<Earthquake> earthquakeData) {
-            mAdapter.clear();
-            if (earthquakeData != null && !earthquakeData.isEmpty()) {
-                mAdapter.addAll(earthquakeData);
-            }
-
-           /*
-            if (result == null) {
-                return;
-            }
-            updateUI(result);
-        }
-        */ /*
-        }
-    }  */
 
 
 
