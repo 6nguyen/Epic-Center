@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Epic Center</string>
+
+    <!-- String for http requests that result in no earthquake data -->
+    <string name="empty_view_string">Looks like there haven\'t been any earthquakes for a while.  That\'s great! ...right?</string>
+
+    <string name="sample_string">Placeholder string data</string>
 </resources>
