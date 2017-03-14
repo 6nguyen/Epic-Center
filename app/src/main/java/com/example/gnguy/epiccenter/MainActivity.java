@@ -3,6 +3,8 @@ package com.example.gnguy.epiccenter;
 import android.content.Intent;
 import android.content.Loader;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.app.LoaderManager;
 import android.app.LoaderManager.LoaderCallbacks;
@@ -35,6 +37,9 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
     /** Empty textView for http requests that query empty earthquake results */
     private TextView mEmptyView;
 
+    /** Empty textView for when no internet connection is detected */
+    private TextView mNoInternetView;
+
     /** Loading indicator circle that displays progress */
     private ProgressBar mIndicatorCircle;
 
@@ -57,6 +62,12 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
         Log.e(LOG_TAG, "TEST: MainActivity onCreate method called.");
         setContentView(R.layout.activity_main);
 
+        // Initialize a ConnectivityManager to check whether there is an internet connection
+        // Create boolean to store connectivity status
+        ConnectivityManager cm = (ConnectivityManager)this.getSystemService(this.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        boolean isConnected = activeNetwork != null && activeNetwork.isConnected();
+
         // Find a reference to the {@link ListView} in the layout
         ListView listView = (ListView)findViewById(R.id.list_view);
 
@@ -70,6 +81,9 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
         // Find a reference to the mEmptyView
         mEmptyView = (TextView)findViewById(R.id.empty_view);
         listView.setEmptyView(mEmptyView);
+
+        // Find a reference to the mNoInternetView
+        mNoInternetView = (TextView)findViewById(R.id.no_internet_connection);
 
         // Find a reference to the mIndicatorCircle and set the color to pale blue
         mIndicatorCircle = (ProgressBar)findViewById(R.id.progress_indicator);
@@ -98,11 +112,19 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
 
 
         // Get a reference to the LoaderManager, to interact with loaders
-        // Initiate the loader with parameters loaderID, bypass the bundle, and pass in this
-        // activity for LoaderCallbacks param.
+        // if there is an internet connection: Initiate the loader with parameters loaderID,
+        // bypass the bundle, and pass in this activity for LoaderCallbacks param.
+        // if there is NO internet connection: display the mNoInternetView
         LoaderManager loaderManager = getLoaderManager();
-        loaderManager.initLoader(LOADER_ID, null, this);
-        Log.e(LOG_TAG, "TEST: LoaderManager initialized with initLoader");
+        if (isConnected) {
+            loaderManager.initLoader(LOADER_ID, null, this);
+            Log.e(LOG_TAG, "TEST: LoaderManager initialized with initLoader");
+        } else {
+            //loaderManager.initLoader(LOADER_ID, null, this);
+            mIndicatorCircle.setVisibility(GONE);
+            mNoInternetView.setText(R.string.no_internet_connection);
+            Log.e(LOG_TAG, "TEST: No internet connection, display mNoInternetView");
+        }
 
     }
 
