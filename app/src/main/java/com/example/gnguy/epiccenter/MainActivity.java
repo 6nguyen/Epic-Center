@@ -82,8 +82,6 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
         mEmptyView = (TextView)findViewById(R.id.empty_view);
         listView.setEmptyView(mEmptyView);
 
-        // Find a reference to the mNoInternetView
-        mNoInternetView = (TextView)findViewById(R.id.no_internet_connection);
 
         // Find a reference to the mIndicatorCircle and set the color to pale blue
         mIndicatorCircle = (ProgressBar)findViewById(R.id.progress_indicator);
@@ -122,7 +120,7 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
         } else {
             //loaderManager.initLoader(LOADER_ID, null, this);
             mIndicatorCircle.setVisibility(GONE);
-            mNoInternetView.setText(R.string.no_internet_connection);
+            mEmptyView.setText(R.string.no_internet_connection);
             Log.e(LOG_TAG, "TEST: No internet connection, display mNoInternetView");
         }
 

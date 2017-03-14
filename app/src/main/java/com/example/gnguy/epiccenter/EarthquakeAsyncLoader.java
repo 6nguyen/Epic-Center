@@ -23,7 +23,7 @@ public class EarthquakeAsyncLoader extends AsyncTaskLoader<List<Earthquake>> {
     @Override
     protected void onStartLoading() {
         forceLoad();
-        Log.e(LOG_TAG, "TEST: Loading AsyncTaskLoaer onStartLoading forceLoad();");
+        Log.e(LOG_TAG, "TEST: Loading AsyncTaskLoader onStartLoading forceLoad();");
     }
 
     @Override
