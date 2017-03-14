@@ -18,7 +18,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Helper methods related to requesting and receiving earthquake data from USGS.
+ * ****************************************************************************************
+ * Helper methods related to requesting, receiving, and extracting earthquake data from USGS.
+ * ****************************************************************************************
  */
 public final class QueryUtils {
 

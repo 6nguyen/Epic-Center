@@ -10,6 +10,12 @@ import java.util.List;
  * Created by gnguy on 3/9/2017.
  */
 
+/**
+ *  ****************************************************************************************
+ *   AsyncTaskLoader class allows app to connect to network in background thread
+ *  ****************************************************************************************
+ */
+
 public class EarthquakeAsyncLoader extends AsyncTaskLoader<List<Earthquake>> {
 
     private static final String LOG_TAG = EarthquakeAsyncLoader.class.getName();

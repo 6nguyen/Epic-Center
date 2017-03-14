@@ -23,9 +23,10 @@ import java.util.List;
 
 import static android.view.View.GONE;
 
+
 public class MainActivity extends AppCompatActivity implements LoaderCallbacks<List<Earthquake>> {
 
-    /** Short cut for log tag parameter */
+    /** Shortcut for log tag parameter */
     private static final String LOG_TAG = MainActivity.class.getName();
 
     /** Adapter for the earthquakeList */

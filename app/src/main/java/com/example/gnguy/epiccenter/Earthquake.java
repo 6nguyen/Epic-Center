@@ -4,6 +4,12 @@ package com.example.gnguy.epiccenter;
  * Created by gnguy on 3/1/2017.
  */
 
+/**
+ *  ****************************************************************************************
+ *   Earthquake Java class allows for simple extraction and manipulation of desired fields
+ *  ****************************************************************************************
+ */
+
 public class Earthquake {
 
     private double mMagnitude;

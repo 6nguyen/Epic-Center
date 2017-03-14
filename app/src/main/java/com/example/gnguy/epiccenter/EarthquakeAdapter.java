@@ -20,6 +20,12 @@ import java.util.List;
  * Created by gnguy on 3/1/2017.
  */
 
+/**
+ *  ****************************************************************************************
+ *   Layout and text formatting for earthquake data
+ *  ****************************************************************************************
+ */
+
 public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
 
     public EarthquakeAdapter(Context context, List<Earthquake> earthquakeList) {
