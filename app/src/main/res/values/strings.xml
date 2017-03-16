@@ -6,4 +6,10 @@
 
     <!-- String displayed when no internet connection is detected -->
     <string name="no_internet_connection">It looks like you\'re not connected to the All-Powerful Interwebs.  Maybe you should, just sayin\'.</string>
+
+    <!-- String for Filter menu item -->
+    <string name="filter_menu_item">Filter</string>
+
+    <!-- String for FilterActivity -->
+    <string name="filter_title">Earthquake Filter</string>
 </resources>
