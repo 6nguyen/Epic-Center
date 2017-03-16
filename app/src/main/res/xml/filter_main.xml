@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/filter_title" >
+
+    <EditTextPreference
+        android:defaultValue="@string/filter_min_mag_default"
+        android:inputType="numberDecimal"
+        android:key="@string/filter_min_mag_key"
+        android:selectAllOnFocus="true"
+        android:title="@string/filter_min_mag_lable" />
+    
+</PreferenceScreen>
