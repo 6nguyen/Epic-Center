@@ -172,9 +172,15 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
     public Loader<List<Earthquake>> onCreateLoader(int i, Bundle bundle) {
 
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        // Set up minMagnitude value to user input
         String minMagnitude = sharedPrefs.getString(
                                                 getString(R.string.filter_min_mag_key),
                                                 getString(R.string.filter_min_mag_default));
+        // Set up maxMagnitude value to user input
+        String maxMagnitude = sharedPrefs.getString(
+                                                getString(R.string.filter_max_mag_key),
+                                                getString(R.string.filter_max_mag_default));
+
         Uri baseUri = Uri.parse(EARTHQUAKE_REQUEST_URL);
         Uri.Builder uriBuilder = baseUri.buildUpon();
 
@@ -184,6 +190,7 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
         uriBuilder.appendQueryParameter("minmag",minMagnitude);
         uriBuilder.appendQueryParameter("limit","20");
         uriBuilder.appendQueryParameter("starttime","2017-01-01");
+        uriBuilder.appendQueryParameter("maxmag",maxMagnitude);
 
         Log.e(LOG_TAG, "TEST: Loader created onCreateLoader.");
         return new EarthquakeAsyncLoader(this, uriBuilder.toString());
