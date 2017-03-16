@@ -9,7 +9,7 @@
         android:id="@+id/action_filter"
         android:title="@string/filter_menu_item"
         android:orderInCategory="1"
-        android:icon="@drawable/menu_plain_3"
+        android:icon="@drawable/filter_simple"
         app:showAsAction="ifRoom"
         />
 
