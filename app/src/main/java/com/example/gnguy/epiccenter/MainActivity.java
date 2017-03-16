@@ -2,6 +2,7 @@ package com.example.gnguy.epiccenter;
 
 import android.content.Intent;
 import android.content.Loader;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -9,6 +10,7 @@ import android.net.Uri;
 import android.app.LoaderManager;
 import android.app.LoaderManager.LoaderCallbacks;
 
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -168,8 +170,23 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
      */
     @Override
     public Loader<List<Earthquake>> onCreateLoader(int i, Bundle bundle) {
+
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        String minMagnitude = sharedPrefs.getString(
+                                                getString(R.string.filter_min_mag_key),
+                                                getString(R.string.filter_min_mag_default));
+        Uri baseUri = Uri.parse(EARTHQUAKE_REQUEST_URL);
+        Uri.Builder uriBuilder = baseUri.buildUpon();
+
+        //"https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&orderby=time&minmag=3&limit=10&starttime=2100-01-01";
+        uriBuilder.appendQueryParameter("format","geojson");
+        uriBuilder.appendQueryParameter("limit","20");
+        uriBuilder.appendQueryParameter("minmag",minMagnitude);
+        uriBuilder.appendQueryParameter("orderby","time");
+        uriBuilder.appendQueryParameter("starttime","2017-01-01");
+
         Log.e(LOG_TAG, "TEST: Loader created onCreateLoader.");
-        return new EarthquakeAsyncLoader(this, EARTHQUAKE_REQUEST_URL);
+        return new EarthquakeAsyncLoader(this, uriBuilder.toString());
     }
 
     @Override
