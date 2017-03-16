@@ -13,9 +13,14 @@
     <!-- String for FilterActivity -->
     <string name="filter_title">Earthquake Filter</string>
 
-    <!-- Strings for Minimum  Magnitude Preference -->
+    <!-- Strings for Minimum Magnitude Preference -->
     <string name="filter_min_mag_lable">Minimum Magnitude</string>
     <string name="filter_min_mag_key" translatable="false">min_magnitude</string>
     <string name="filter_min_mag_default" translatable="false">2.4</string>
+
+    <!-- Strings for Maximum Magnitude Preference -->
+    <string name="filter_max_mag_lable">Maximum Magnitude</string>
+    <string name="filter_max_mag_key">max_magnitude</string>
+    <string name="filter_max_mag_default">10</string>
 
 </resources>

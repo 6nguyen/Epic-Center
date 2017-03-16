@@ -180,9 +180,9 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
 
         //"https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&orderby=time&minmag=3&limit=10&starttime=2100-01-01";
         uriBuilder.appendQueryParameter("format","geojson");
-        uriBuilder.appendQueryParameter("limit","20");
-        uriBuilder.appendQueryParameter("minmag",minMagnitude);
         uriBuilder.appendQueryParameter("orderby","time");
+        uriBuilder.appendQueryParameter("minmag",minMagnitude);
+        uriBuilder.appendQueryParameter("limit","20");
         uriBuilder.appendQueryParameter("starttime","2017-01-01");
 
         Log.e(LOG_TAG, "TEST: Loader created onCreateLoader.");

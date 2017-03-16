@@ -3,11 +3,20 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:title="@string/filter_title" >
 
+    <!-- Minimum Magnitude option of filter menu -->
     <EditTextPreference
         android:defaultValue="@string/filter_min_mag_default"
         android:inputType="numberDecimal"
         android:key="@string/filter_min_mag_key"
         android:selectAllOnFocus="true"
         android:title="@string/filter_min_mag_lable" />
+
+    <!-- Maximum Magnitude option of filter menu -->
+    <EditTextPreference
+        android:defaultValue="@string/filter_max_mag_default"
+        android:inputType="numberDecimal"
+        android:key="@string/filter_max_mag_key"
+        android:selectAllOnFocus="true"
+        android:title="@string/filter_max_mag_lable" />
 
 </PreferenceScreen>
