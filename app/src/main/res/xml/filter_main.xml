@@ -9,5 +9,5 @@
         android:key="@string/filter_min_mag_key"
         android:selectAllOnFocus="true"
         android:title="@string/filter_min_mag_lable" />
-    
+
 </PreferenceScreen>
