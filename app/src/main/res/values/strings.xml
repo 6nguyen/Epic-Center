@@ -24,7 +24,7 @@
     <string name="filter_max_mag_default">10</string>
 
     <!-- Strings for Start Time EditTextPreference -->
-    <string name="filter_start_time_label">Start Time</string>
+    <string name="filter_start_time_label">Starting From</string>
     <string name="filter_start_time_key">start_time</string>
     <string name="filter_start_time_default">2017-01-01</string>
     
