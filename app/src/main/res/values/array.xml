@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Order By drop down options in filter menu -->
+    <string-array name="order_by_options">
+        <item>Lowest Magnitude</item>
+        <item>Highest Magnitude</item>
+        <item>Most Recent</item>
+    </string-array>
+
+    <!-- Order By drop down values for above options -->
+    <string-array name="order_by_values">
+        <item>magnitude-asc</item>
+        <item>magnitude</item>
+        <item>time</item>
+    </string-array>
+
+</resources>

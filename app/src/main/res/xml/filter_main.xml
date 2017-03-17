@@ -5,18 +5,42 @@
 
     <!-- Minimum Magnitude option of filter menu -->
     <EditTextPreference
+        android:id="@+id/min_mag_filter"
         android:defaultValue="@string/filter_min_mag_default"
         android:inputType="numberDecimal"
         android:key="@string/filter_min_mag_key"
         android:selectAllOnFocus="true"
-        android:title="@string/filter_min_mag_lable" />
+        android:title="@string/filter_min_mag_label" />
 
     <!-- Maximum Magnitude option of filter menu -->
     <EditTextPreference
+        android:id="@+id/max_mag_filter"
         android:defaultValue="@string/filter_max_mag_default"
         android:inputType="numberDecimal"
         android:key="@string/filter_max_mag_key"
         android:selectAllOnFocus="true"
-        android:title="@string/filter_max_mag_lable" />
+        android:title="@string/filter_max_mag_label" />
+
+    <!-- Start Time option of filter menu -->
+    <EditTextPreference
+        android:id="@+id/time_filter"
+        android:defaultValue="@string/filter_start_time_default"
+        android:inputType="text"
+        android:key="@string/filter_start_time_key"
+        android:selectAllOnFocus="true"
+        android:title="@string/filter_start_time_label" />
+
+    <!-- Ordery By dropdown option of filter menu -->
+    <ListPreference
+        android:id="@+id/order_spinner"
+        android:key="@string/filter_order_by_key"
+        android:defaultValue="@string/filter_order_by_default"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:title="@string/filter_order_by_label"
+        android:entries="@array/order_by_options"
+        android:entryValues="@array/order_by_values" >
+    </ListPreference>
+
 
 </PreferenceScreen>

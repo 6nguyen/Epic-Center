@@ -14,13 +14,24 @@
     <string name="filter_title">Earthquake Filter</string>
 
     <!-- Strings for Minimum Magnitude Preference -->
-    <string name="filter_min_mag_lable">Minimum Magnitude</string>
+    <string name="filter_min_mag_label">Minimum Magnitude</string>
     <string name="filter_min_mag_key" translatable="false">min_magnitude</string>
     <string name="filter_min_mag_default" translatable="false">2.4</string>
 
-    <!-- Strings for Maximum Magnitude Preference -->
-    <string name="filter_max_mag_lable">Maximum Magnitude</string>
+    <!-- Strings for Maximum Magnitude EditTextPreference -->
+    <string name="filter_max_mag_label">Maximum Magnitude</string>
     <string name="filter_max_mag_key">max_magnitude</string>
     <string name="filter_max_mag_default">10</string>
+
+    <!-- Strings for Start Time EditTextPreference -->
+    <string name="filter_start_time_label">Start Time</string>
+    <string name="filter_start_time_key">start_time</string>
+    <string name="filter_start_time_default">2017-01-01</string>
+    
+    <!-- Strings for Order By ListPreference -->
+    <string name="filter_order_by_label">Order By</string>
+    <string name="filter_order_by_key">order_by</string>
+    <string name="filter_order_by_default">time</string>
+
 
 </resources>

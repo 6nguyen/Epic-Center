@@ -20,7 +20,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -86,6 +88,22 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
         // Find a reference to the mEmptyView
         mEmptyView = (TextView)findViewById(R.id.empty_view);
         listView.setEmptyView(mEmptyView);
+
+        /*
+        // Spinner for Filter Menu
+        Spinner orderSpinner = (Spinner)findViewById(R.id.order_spinner);
+        orderSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(MainActivity.this, parent.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        */
 
 
         // Find a reference to the mIndicatorCircle and set the color to pale blue
@@ -172,24 +190,34 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
     public Loader<List<Earthquake>> onCreateLoader(int i, Bundle bundle) {
 
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-        // Set up minMagnitude value to user input
+        // Set up minMagnitude value to user input, otherwise default value
         String minMagnitude = sharedPrefs.getString(
                                                 getString(R.string.filter_min_mag_key),
                                                 getString(R.string.filter_min_mag_default));
-        // Set up maxMagnitude value to user input
+        // Set up maxMagnitude value to user input, otherwise default value
         String maxMagnitude = sharedPrefs.getString(
                                                 getString(R.string.filter_max_mag_key),
                                                 getString(R.string.filter_max_mag_default));
+
+        // Set up startTime value to user input, otherwise default value
+        String startTime = sharedPrefs.getString(
+                                                getString(R.string.filter_start_time_key),
+                                                getString(R.string.filter_start_time_default));
+
+        // Set up orderBy value to user input, otherwise default value
+        String orderBy = sharedPrefs.getString(
+                                                getString(R.string.filter_order_by_key),
+                                                getString(R.string.filter_order_by_default));
 
         Uri baseUri = Uri.parse(EARTHQUAKE_REQUEST_URL);
         Uri.Builder uriBuilder = baseUri.buildUpon();
 
         //"https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&orderby=time&minmag=3&limit=10&starttime=2100-01-01";
         uriBuilder.appendQueryParameter("format","geojson");
-        uriBuilder.appendQueryParameter("orderby","time");
+        uriBuilder.appendQueryParameter("orderby",orderBy);
         uriBuilder.appendQueryParameter("minmag",minMagnitude);
         uriBuilder.appendQueryParameter("limit","20");
-        uriBuilder.appendQueryParameter("starttime","2017-01-01");
+        uriBuilder.appendQueryParameter("starttime",startTime);
         uriBuilder.appendQueryParameter("maxmag",maxMagnitude);
 
         Log.e(LOG_TAG, "TEST: Loader created onCreateLoader.");
