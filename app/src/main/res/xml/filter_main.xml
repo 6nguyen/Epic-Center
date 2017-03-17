@@ -39,7 +39,7 @@
         android:layout_height="wrap_content"
         android:title="@string/filter_order_by_label"
         android:entries="@array/order_by_options"
-        android:entryValues="@array/order_by_values" >
+        android:entryValues="@array/order_by_values">
     </ListPreference>
 
 
