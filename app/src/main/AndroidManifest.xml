@@ -24,7 +24,8 @@
             android:label="@string/filter_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.gnguy.epiccenter.MainActivity"/>
+                android:value="com.example.gnguy.epiccenter.MainActivity"
+                />
         </activity>
     </application>
 

@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:title="@string/filter_title" >
+    android:title="@string/filter_title"
+    android:background="@color/listBackground"
+    >
 
     <!-- Minimum Magnitude option of filter menu -->
     <EditTextPreference
@@ -39,7 +41,9 @@
         android:layout_height="wrap_content"
         android:title="@string/filter_order_by_label"
         android:entries="@array/order_by_options"
-        android:entryValues="@array/order_by_values">
+        android:entryValues="@array/order_by_values"
+        android:icon="@drawable/order_by"
+        android:dialogIcon="@drawable/order_by">
     </ListPreference>
 
 
