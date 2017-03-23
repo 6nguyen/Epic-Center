@@ -23,16 +23,6 @@
         android:selectAllOnFocus="true"
         android:title="@string/filter_max_mag_label" />
 
-    <!-- Start Time option of filter menu -->
-    <EditTextPreference
-        android:id="@+id/time_filter"
-        android:defaultValue="@string/filter_start_time_default"
-        android:inputType="text"
-        android:key="keyname"
-        android:selectAllOnFocus="true"
-        android:title="@string/filter_start_time_label"
-        android:summary="yyyy-mm-dd"/>
-
     <!-- Start Time datePicker popup calendar option of filter menu -->
     <com.gnguyen.android.epiccenter.DatePreference
         android:key="@string/filter_start_time_key"
