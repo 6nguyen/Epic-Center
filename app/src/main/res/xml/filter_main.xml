@@ -26,7 +26,7 @@
     <!-- Start Time datePicker popup calendar option of filter menu -->
     <com.gnguyen.android.epiccenter.DatePreference
         android:key="@string/filter_start_time_key"
-        android:title="calendar"
+        android:title="@string/filter_start_time_label"
         android:defaultValue="@string/filter_start_time_default"
         />
 

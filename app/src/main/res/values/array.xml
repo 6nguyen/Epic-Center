@@ -6,6 +6,7 @@
         <item>Lowest Magnitude</item>
         <item>Highest Magnitude</item>
         <item>Most Recent</item>
+        <item>Oldest</item>
     </string-array>
 
     <!-- Order By drop down values for above options -->
@@ -13,6 +14,7 @@
         <item>magnitude-asc</item>
         <item>magnitude</item>
         <item>time</item>
+        <item>time-asc</item>
     </string-array>
 
 </resources>
