@@ -22,13 +22,13 @@
     <color name="magnitude3">#00CC99</color>
 
     <!-- Magnitude circle color for an earthquake with magnitude between 4 and 5 -->
-    <color name="magnitude4">#99FA00</color>
+    <color name="magnitude4">#99DC00</color>
 
     <!-- Magnitude circle color for an earthquake with magnitude between 5 and 6 -->
-    <color name="magnitude5">#FFCC00</color>
+    <color name="magnitude5">#FFBC00</color>
 
     <!-- Magnitude circle color for an earthquake with magnitude between 6 and 7 -->
-    <color name="magnitude6">#FF8106</color>
+    <color name="magnitude6">#FF8000</color>
 
     <!-- Magnitude circle color for an earthquake with magnitude between 7 and 8 -->
     <color name="magnitude7">#EE4000</color>
