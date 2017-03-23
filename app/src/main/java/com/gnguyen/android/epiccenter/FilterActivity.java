@@ -35,7 +35,12 @@ public class FilterActivity extends AppCompatActivity  {
 
             Preference maxMagnitude = findPreference(getString(R.string.filter_max_mag_key));
             bindPreferenceSummaryToValue(maxMagnitude);
-            
+
+            Preference startingFrom = findPreference(getString(R.string.filter_start_time_key));
+            bindPreferenceSummaryToValue(startingFrom);
+
+            Preference orderBy = findPreference(getString(R.string.filter_order_by_key));
+            bindPreferenceSummaryToValue(orderBy);
         }
 
         // Set up Preference to detect when a preference is changed and display the current
