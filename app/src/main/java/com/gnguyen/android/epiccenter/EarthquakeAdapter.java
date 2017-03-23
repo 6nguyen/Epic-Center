@@ -1,4 +1,4 @@
-package com.example.gnguy.epiccenter;
+package com.gnguyen.android.epiccenter;
 
 import android.content.Context;
 import android.graphics.drawable.GradientDrawable;
@@ -8,8 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;

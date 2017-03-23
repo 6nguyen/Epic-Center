@@ -1,4 +1,4 @@
-package com.example.gnguy.epiccenter;
+package com.gnguyen.android.epiccenter;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

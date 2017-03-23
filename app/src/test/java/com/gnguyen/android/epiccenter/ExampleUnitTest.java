@@ -1,4 +1,4 @@
-package com.example.gnguy.epiccenter;
+package com.gnguyen.android.epiccenter;
 
 import org.junit.Test;
 

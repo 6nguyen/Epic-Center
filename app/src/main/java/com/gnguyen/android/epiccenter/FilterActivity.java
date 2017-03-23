@@ -1,8 +1,9 @@
-package com.example.gnguy.epiccenter;
+package com.gnguyen.android.epiccenter;
 
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.EditText;
 
 /**
  * Created by gnguy on 3/16/2017.

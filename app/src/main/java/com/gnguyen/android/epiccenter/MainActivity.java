@@ -1,4 +1,4 @@
-package com.example.gnguy.epiccenter;
+package com.gnguyen.android.epiccenter;
 
 import android.content.Intent;
 import android.content.Loader;
@@ -20,9 +20,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,9 +41,6 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
 
     /** Empty textView for http requests that query empty earthquake results */
     private TextView mEmptyView;
-
-    /** Empty textView for when no internet connection is detected */
-    private TextView mNoInternetView;
 
     /** Loading indicator circle that displays progress */
     private ProgressBar mIndicatorCircle;
@@ -88,22 +83,6 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
         // Find a reference to the mEmptyView
         mEmptyView = (TextView)findViewById(R.id.empty_view);
         listView.setEmptyView(mEmptyView);
-
-        /*
-        // Spinner for Filter Menu
-        Spinner orderSpinner = (Spinner)findViewById(R.id.order_spinner);
-        orderSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(MainActivity.this, parent.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-        */
 
 
         // Find a reference to the mIndicatorCircle and set the color to pale blue
@@ -171,7 +150,6 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
 
 
 
-
     /**
      *  Update the UI with the given earthquake list information
      */
@@ -184,7 +162,9 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
 
 
     /**
-     * Three abstract callback methods necessary for AsyncTaskLoader     *
+     * Three abstract callback methods necessary for AsyncTaskLoader
+     * onCreateLoader, onLoadFinished, onLoaderReset
+     * Declaring user-customizable filter variables and building a URI based on user changes
      */
     @Override
     public Loader<List<Earthquake>> onCreateLoader(int i, Bundle bundle) {
