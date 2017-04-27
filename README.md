@@ -1,6 +1,11 @@
 # Epic-Center
 California earthquake tracking app
 
+Connects to the USGS Earthquake Data API and syncs automatically.  Filter and sort your earthquake results by given variables.
+- Earthquake magnitudes are represented by numbers and corresponding colors
+- AsyncTask Loader used to load fragments and prevent memory leaks
+- Progress Bar spinners and empty activities with error messages to inform user when and why results won't appear
+
 
 # Credits ----------------------
 Launcher Icon:
